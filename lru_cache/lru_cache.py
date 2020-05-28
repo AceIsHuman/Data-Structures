@@ -24,7 +24,17 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        if key not in self.dict:
+            return None
+            
+        node = self.dll.head
+        while node is not None:
+            if key == node.value[0]:
+                self.dll.move_to_front(node)
+                break
+            node = node.next
+
+        return self.dict[key]
 
     """
     Adds the given key-value pair to the cache. The newly-
