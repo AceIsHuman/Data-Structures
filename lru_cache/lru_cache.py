@@ -47,4 +47,28 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if key in self.dict:
+            self.dict[key] = value
+
+            node = self.dll.head
+            while node is not None:
+                if key == node.value[0]:
+                    node.value[1] = value
+                    self.dll.move_to_front(node)
+                    break
+
+                node = node.next
+
+        else:
+            if self.node_count == self.limit:
+                node = self.dll.tail
+                old_key = node.value[0]
+                self.dll.remove_from_tail()
+
+                del self.dict[old_key]
+                self.node_count -= 1
+
+            self.dict[key] = value
+            self.dll.add_to_head([key, value])
+            self.node_count += 1
+
