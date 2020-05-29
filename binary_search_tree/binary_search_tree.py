@@ -100,7 +100,20 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        # make a stack
+        stack = Stack()
+        # push the node on the stack
+        stack.push(node)
+        # as long as the stack is not empty
+        # pop off the stack, this is our current node
+        while stack.size:
+            node =  stack.pop()
+        # put the kids of the current node on the stack
+            if node.left:
+                stack.push(node.left)
+            if node.right:
+                stack.push(node.right)
+            print(node.value)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
